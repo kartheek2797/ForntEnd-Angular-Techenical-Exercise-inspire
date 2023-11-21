@@ -1,0 +1,72 @@
+
+<div class="author-info container">
+    <h2 class="author-name">Author: {{author}}</h2>
+    <p class="author-birthplace">Birthplace: {{birthPlace}}</p>
+    <p class="author-birthday">Birthday: {{birthday}}</p>
+    
+</div>
+  <div id="sort-toggle" class="container">
+      <div class="row">
+          <div class="col-md-2 col-sm-2 col-lg-1 col-2"><label>Sort by: </label></div>
+          <div class="col-md-3 col-sm-6 col-lg-4 col-6 sort-select">
+              <select (change)="sort($event)" class="form-control sortField">
+                  <option value="titleA">Title (Ascending)</option>
+                  <option value="titleD">Title (Descending)</option>
+                  <option value="publishDateA">Publish Date (Ascending)</option>
+                  <option value="publishDateD">Publish Date (Descending)</option>
+              </select>
+          </div>
+          <div class="col-md-4 col-sm-5 col-lg-3">
+              <button (click)="addNew()" class="btn btn-success add-btn">Add New Book</button>
+          </div>
+      </div>        
+  </div>
+  <div class="container">
+    <div class="row">
+        <div class="book-list col-md-6" *ngFor ="let book of bookList">
+            <div class="card">
+                <div class="card-body">
+                <img src="{{book.imageUrl}}" alt="{{book.alt}}" class="bookImage">
+                  <h2 class="card-title">{{book.title}}</h2>
+                  <h4 class="card-subtitle mb-2 text-body-secondary">Publish Date: {{book.PublishDate}}</h4>
+                  <a href="{{book.purchaseLink}}" target="_blank"><button type="button" class="btn btn-success btn-lg purchase-btn">Buy Now</button></a>
+                  <button type="button" class="btn btn-primary btn-lg edit-btn" (click)="showDialog(book)">Edit Book</button>
+                  <button type="button" class="btn btn-danger btn-lg edit-btn" (click)="delete(book)">Delete Book</button>
+                </div>
+              </div>
+          </div>
+    </div>
+  </div>
+
+  <p-dialog header="Edit Book" [(visible)]="visible" [breakpoints]="{ '960px': '75vw' }" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div class="modal-content" *ngIf="editForm" [formGroup]="editForm">
+        <div class="popup-fields">
+            <label for="newTitle">New Title:</label>
+            <input type="text" formControlName="newTitle" class="form-control">
+        </div>
+        <div class="popup-fields">
+            <label for="checkField">Image Upload</label>
+            <input type="checkbox" formControlName="toggleCheckbox" (change)="toggleFields()" class="checkBox">
+            <div id="textField">
+              <label for="newImage">New Image URL:</label>
+              <input type="text" id="textImageField" class="form-control" formControlName="textImageField">
+            </div>
+            <div id="fileField">
+              <label for="newImage">Upload Image</label>
+              <input type="file" id="fileImageField" class="form-control" formControlName="fileImageField" (change) = fileChange($event)>
+            </div>
+          </div>                  
+        <div class="popup-fields">
+            <label for="newPurchaseUrl">New Purchase URL:</label>
+            <input type="text" formControlName="newPurchaseUrl" class="form-control">
+        </div>
+        <div class="popup-fields">
+            <label for="newPublishDate">New Publish Date:</label>
+            <input type="text" formControlName="newPublishDate" class="form-control">
+        </div>
+        <input type="text" formControlName="oldTitle" hidden>
+        <br/>
+        <button (click)="saveEdit()" *ngIf="saveBtn" class="btn btn-success">Save Changes</button>
+        <button (click)="addBook()"  *ngIf="addBtn" class="btn btn-success">Add Book</button>
+    </div>
+  </p-dialog>

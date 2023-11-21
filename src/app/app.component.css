@@ -1,0 +1,40 @@
+.sort-select{
+    margin-bottom:5px
+}
+.bookImage{
+    width:40%;
+    margin-bottom:5px
+}
+.card{
+margin-bottom:10px
+}
+.purchase-btn{
+    font-size:12px;
+    margin-bottom:5px
+}
+.edit-btn{
+    font-size:12px;
+    margin-bottom:5px;
+    margin-left: 5px;
+}
+.popup-fields [disabled] {
+    opacity: 0.5; /* or any other styling */
+    pointer-events: none; /* this prevents interaction with the input */
+  }
+  .modal-content .popup-fields{
+    margin-bottom: 15px;
+}
+.checkBox{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+.btn-danger{
+    font-size:12px;
+    margin-bottom:5px
+}
+.author-info{
+    margin-top:10px
+}
+.add-btn{
+    margin-bottom:8px
+}
